@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bug Detectives</title>
+  <meta name="description" content="A pixel-art game that teaches kids how to debug: find the bug, fix the code, reach the star.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <canvas id="bg"></canvas>
+  <canvas id="confetti"></canvas>
+  <div id="scan"></div>
+
+  <div id="stage">
+
+    <!-- TITLE -->
+    <section class="screen on" id="title">
+      <div class="title"><span class="amber">BUG</span></div>
+      <div class="title" style="margin-top:6px">DETECTIVES</div>
+      <div class="sub">find the bug &middot; fix the code &middot; reach the star</div>
+      <div class="row" style="margin-top:56px">
+        <button class="btn big go" onclick="go('intro')" data-icon="play"><span>START</span></button>
+      </div>
+    </section>
+
+    <!-- WHAT IS A BUG? -->
+    <section class="screen" id="intro">
+      <div class="h2">WHAT IS A BUG?</div>
+      <div class="bubble px">
+        Computers do <span class="hl-amber">EXACTLY</span> what we tell them...<br>even when we are wrong!<br><br>
+        A <span class="hl-green">BUG</span> is a mistake in the instructions.<br>
+        <span class="hl-green">DEBUGGING</span> means finding it and fixing it.
+      </div>
+      <div class="row" style="margin-top:50px">
+        <button class="btn big go" onclick="go('method')" data-icon-after="play"><span>NEXT</span></button>
+      </div>
+    </section>
+
+    <!-- THE DETECTIVE METHOD -->
+    <section class="screen" id="method">
+      <div class="h2">THE DETECTIVE METHOD</div>
+      <div class="bigsteps">
+        <div class="bigstep px"><div class="num">1</div><b>PREDICT</b><p>What SHOULD<br>the alien do?</p></div>
+        <div class="bigstep px"><div class="num">2</div><b>TEST</b><p>Go one step<br>at a time.</p></div>
+        <div class="bigstep px"><div class="num">3</div><b>FIX</b><p>Change ONE thing,<br>then test again.</p></div>
+      </div>
+      <div class="row" style="margin-top:50px">
+        <button class="btn big go" onclick="openCase1()" data-icon-after="play"><span>OPEN CASE 1</span></button>
+      </div>
+    </section>
+
+    <!-- GAME -->
+    <section class="screen" id="game">
+      <div class="topbar">
+        <div class="h2" id="caseTitle">CASE 1</div>
+        <div class="pill px" id="caseInfo">BUGS HIDING: 1</div>
+      </div>
+      <div class="main">
+        <div class="boardwrap px"><div class="board" id="board"></div></div>
+        <div class="side">
+          <div class="card px">
+            <div class="label">THE ALIEN'S CODE &middot; CLICK AN ARROW TO CHANGE IT</div>
+            <div class="code" id="code"></div>
+          </div>
+          <div class="row">
+            <button class="btn go" id="bRun"   onclick="run()"      data-icon="play"><span>RUN</span></button>
+            <button class="btn"    id="bStep"  onclick="stepOnce()" data-icon="step"><span>STEP</span></button>
+            <button class="btn"    id="bReset" onclick="resetAll()" data-icon="reset"><span>RESET</span></button>
+            <button class="btn"    id="bHint"  onclick="hint()"     data-icon="hint"><span>HINT</span></button>
+          </div>
+          <div class="msg px" id="msg"></div>
+          <div class="steps">
+            <div class="step px" id="s1"><b>PREDICT</b>what should happen?</div>
+            <div class="step px" id="s2"><b>TEST</b>one step at a time</div>
+            <div class="step px" id="s3"><b>FIX</b>change one thing</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CASE CLOSED -->
+    <section class="screen" id="end">
+      <div class="title" style="font-size:110px">CASE CLOSED!</div>
+      <div class="sub">all bugs squashed &middot; nice detective work!</div>
+      <div class="bigsteps" style="margin-top:40px">
+        <div class="bigstep px"><div class="num">1</div><b>PREDICT</b></div>
+        <div class="bigstep px"><div class="num">2</div><b>TEST</b></div>
+        <div class="bigstep px"><div class="num">3</div><b>FIX</b></div>
+      </div>
+      <div class="question">So... what will YOU do next time<br>your game or code breaks?</div>
+      <div class="row" style="margin-top:36px">
+        <button class="btn big"    onclick="go('title')" data-icon="home"><span>MENU</span></button>
+        <button class="btn big go" onclick="playAgain()" data-icon="reset"><span>PLAY AGAIN</span></button>
+      </div>
+    </section>
+  </div>
+
+  <button class="btn mute" id="mute" onclick="toggleMute()"><span>SOUND: ON</span></button>
+  <div class="keys">SPACE run &middot; S step &middot; R reset &middot; H hint &middot; F fullscreen</div>
+
+  <!-- order matters: each file uses things defined in the ones above it -->
+  <script src="js/sprites.js"></script>
+  <script src="js/levels.js"></script>
+  <script src="js/effects.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
